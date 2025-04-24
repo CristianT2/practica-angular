@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="d-flex justify-content-end">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-cart3" style="font-size: 2.4rem;"></i>
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Productos Agregados</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-around" *ngFor="let producto of carrito">
+                            <img src="{{producto.imagen}}" alt="imagen" class="img-fluid" style="width: 3rem;">
+                            <p class="fw-bolder">{{producto.nombre}}</p>
+                            <p class="fw-medium">$ {{producto.precio}}</p>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-end" *ngIf="carrito.length>=1">
+                            <p class="fs-5 fw-bold">Total: ${{ getTotal() }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <div *ngIf="carrito.length>=1">
+                            <button type="button" class="btn btn-primary" (click)="vaciarCarrito()">Vaciar
+                                Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2 class="mb-4">Productos Destacados</h2>
+        <div class="row row-gap-4">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let producto of productos">
+                <div class="card border-2 rounded-3 h-100">
+                    <div class="justify-content-center align-items-center">
+                        <img src="{{producto.imagen}}" class="d-block img-fluid my-auto" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{producto.nombre}}</h5>
+                        <p class="card-text">{{producto.descripcion}}</p>
+                        <p class="fs-5 fw-bold my-2 float-end">$ {{producto.precio}}</p>
+                    </div>
+                    <button class="d-flex mx-auto mb-2 w-75 justify-content-center btn btn-dark"
+                        (click)="addToCar(producto)">
+                        <p class="my-auto fw-bolder">Agregar al Carrito</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
