@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterModule, HeaderComponent],
+  imports: [RouterModule, HeaderComponent, FooterComponent],
   template: `
     <header>
       <app-header></app-header>
@@ -13,7 +14,10 @@ import { HeaderComponent } from "./header/header.component";
       <section>
         <router-outlet></router-outlet>
       </section>
-    </main>  
+    </main> 
+    <footer>
+      <app-footer></app-footer>
+    </footer> 
   `,
   styleUrl: './app.component.css'
 })
