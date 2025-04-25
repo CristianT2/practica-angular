@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Punto1Component } from './punto1/punto1.component';
-import { Punto2Component } from "./punto2/punto2.component";
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from "./header/header.component";
 
 @Component({
   selector: 'app-root',
-  imports: [Punto2Component],
+  imports: [ RouterModule, HeaderComponent],
   template: `
+    <header>
+      <app-header></app-header>
+    </header>
     <main>
       <section>
-        <app-punto2></app-punto2>
+        <router-outlet></router-outlet>
       </section>
     </main>  
   `,
