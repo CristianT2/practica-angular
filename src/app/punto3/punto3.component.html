@@ -1,0 +1,50 @@
+<div class="container-fluid bg-dark text-white min-vh-100 d-flex align-items-center" >
+    <div class="container">
+        <h2 class="text-center mb-4">Juego del Ahorcado</h2>
+        <p class="text-center mb-4">Presiona una letra (A-Z) en tu teclado o haz clic en una letra abajo.</p>
+        <div class="row">
+            <!-- Imagen del estado -->
+            <div class="col-md-6 text-center">
+                <img [src]="imagenEstado" alt="Estado del juego" class="img-fluid mb-4" style="max-width: 300px;">
+                <p>Intentos restantes: {{ intentos }}</p>
+                <p *ngIf="ultimaLetraPresionada" class="ultima-letra">Última letra: {{ ultimaLetraPresionada }}</p>
+            </div>
+            <!-- Juego -->
+            <div class="col-md-6 text-center">
+                <div class="word-display mb-4">
+                    <span *ngFor="let letra of palabraOculta" class="letter mx-1">{{ letra }}</span>
+                </div>
+                <div class="keyboard mb-3">
+                    <button *ngFor="let letra of alfabeto" class="btn btn-outline-light m-1"
+                        [disabled]="juegoTerminado || letrasUsadas.includes(letra)"
+                        (click)="adivinarLetra(letra); ultimaLetraPresionada = letra">{{ letra }}</button>
+                </div>
+                <div class="used-letters mb-3">
+                    <p>Letras usadas: {{ letrasUsadas.join(', ') || 'Ninguna' }}</p>
+                    <p>Categoria: {{categoria}}</p>
+                </div>
+                <button class="btn btn-secondary" (click)="iniciarJuego()" *ngIf="juegoTerminado">Jugar de
+                    nuevo</button>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" [ngClass]="{'show d-block': mostrarModal}" tabindex="-1" *ngIf="mostrarModal">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ mensajeModal.includes('Ganaste') ? '¡Victoria!' : '¡Game Over!' }}
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" (click)="cerrarModal()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ mensajeModal }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="cerrarModal()">Jugar de nuevo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop fade show" *ngIf="mostrarModal"></div>
+    </div>
+</div>

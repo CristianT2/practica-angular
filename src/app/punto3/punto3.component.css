@@ -1,0 +1,52 @@
+.word-display {
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
+  }
+  
+  .letter {
+    display: inline-block;
+    width: 2rem;
+    text-align: center;
+    border-bottom: 2px solid #ffffff;
+  }
+  
+  input.form-control {
+    max-width: 200px;
+  }
+  
+  .btn-primary {
+    background-color: #00cc99;
+    border-color: #00cc99;
+  }
+  
+  .btn-primary:hover {
+    background-color: #169976;
+    border-color: #169976;
+  }
+  
+  .btn-secondary {
+    background-color: #444;
+    border-color: #444;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #555;
+    border-color: #555;
+  }
+  
+  .modal-content {
+    border: 1px solid #444;
+  }
+  
+  @media (max-width: 576px) {
+    .word-display {
+      font-size: 1.5rem;
+      letter-spacing: 0.3rem;
+    }
+    .letter {
+      width: 1.5rem;
+    }
+    img {
+      max-width: 200px;
+    }
+  }
