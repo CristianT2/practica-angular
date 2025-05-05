@@ -1,0 +1,81 @@
+/* Fondo oscuro para todo el componente */
+.bg-dark {
+    background-color: #212529 !important;
+  }
+  
+  /* Estilo para inputs y selectores en tema oscuro */
+  .form-control,
+  .form-select {
+    background-color: #343a40;
+    color: #ffffff;
+    border-color: #495057;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    background-color: #343a40;
+    color: #ffffff;
+    border-color: #00cc99;
+    box-shadow: 0 0 0 0.25rem rgba(0, 204, 153, 0.25);
+  }
+  
+  /* Estilo para el botón personalizado */
+  .btn-custom {
+    background-color: #00cc99;
+    color: #ffffff;
+    border-color: #00cc99;
+  }
+  
+  .btn-custom:hover {
+    background-color: #00b386;
+    border-color: #00b386;
+  }
+  
+  .btn-custom:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 204, 153, 0.5);
+  }
+  
+  /* Estilo para el botón de reset */
+  .btn-outline-secondary {
+    color: #ffffff;
+    border-color: #6c757d;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #ffffff;
+  }
+  
+  /* Mejora visual para las tarjetas */
+  .card.bg-dark {
+    border: 1px solid #495057;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Ajuste de espaciado para las tablas */
+  .table {
+    margin-bottom: 0;
+  }
+  
+  /* Estilo para las celdas de la tabla */
+  .table-dark th,
+  .table-dark td {
+    border-color: #495057;
+  }
+  
+  /* Ajuste para el texto en el resumen */
+  .text-end {
+    font-weight: bold;
+  }
+  
+  /* Responsividad para pantallas pequeñas */
+  @media (max-width: 576px) {
+    .btn-custom,
+    .btn-outline-secondary {
+      width: 100%;
+    }
+    .d-flex.gap-2 {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
