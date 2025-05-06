@@ -3,22 +3,6 @@
     background-color: #212529 !important;
   }
   
-  /* Estilo para inputs y selectores en tema oscuro */
-  .form-control,
-  .form-select {
-    background-color: #343a40;
-    color: #ffffff;
-    border-color: #495057;
-  }
-  
-  .form-control:focus,
-  .form-select:focus {
-    background-color: #343a40;
-    color: #ffffff;
-    border-color: #00cc99;
-    box-shadow: 0 0 0 0.25rem rgba(0, 204, 153, 0.25);
-  }
-  
   /* Estilo para el botón personalizado */
   .btn-custom {
     background-color: #00cc99;
@@ -39,6 +23,7 @@
   .btn-outline-secondary {
     color: #ffffff;
     border-color: #6c757d;
+    background-color: #e9a854;
   }
   
   .btn-outline-secondary:hover {

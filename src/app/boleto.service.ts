@@ -9,21 +9,21 @@ export class BoletoService {
   private boletos: Boleto[] = [
     {
       dni: '39808789',
-      precio: this.calcularPrecioFinal(10000, 1),
+      precio: 10000,
       categoriaTurista: 1,
       fechaCompra: new Date('2025-05-04T20:13:46-03:00'),
       email: 'c.torrejon96@gmail.com'
     },
     {
       dni: '12987651',
-      precio: this.calcularPrecioFinal(10000, 2),
+      precio: 10000,
       categoriaTurista: 2,
       fechaCompra: new Date('2025-05-04T20:14:36-03:00'),
       email: 'email@email.com'
     },
     {
       dni: '13465789',
-      precio: this.calcularPrecioFinal(10000, 3),
+      precio: 10000,
       categoriaTurista: 3,
       fechaCompra: new Date('2025-05-04T20:15:00-03:00'),
       email: 'test@example.com'

@@ -47,7 +47,23 @@ export class Parte2Component implements OnInit, AfterViewInit{
       language: {
         url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json' // Idioma español
       },
-      responsive: true // Hace la tabla adaptable a diferentes tamaños de pantalla
+      responsive: true, // Hace la tabla adaptable a diferentes tamaños de pantalla
+      data: this.getBoletos().map(boleto => ({
+        dni: boleto.dni,
+        email: boleto.email,
+        precio: boleto.precio,
+        precioFinal: this.calcularPrecioFinalParaBoleto(boleto),
+        categoria: this.categorias[boleto.categoriaTurista].label,
+        fechaCompra: boleto.fechaCompra
+      })),
+      columns: [
+        { data: 'dni' },
+        { data: 'email' },
+        { data: 'precio', render: (data: number) => `$${data.toFixed(2)}` },
+        { data: 'precioFinal', render: (data: number) => `$${data.toFixed(2)}` },
+        { data: 'categoria' },
+        { data: 'fechaCompra', render: (data: string) => new Date(data).toLocaleDateString('es-AR') }
+      ]
     };
 
     // Calcula el precio final inicial
@@ -124,15 +140,37 @@ export class Parte2Component implements OnInit, AfterViewInit{
 
   // Destruye y vuelve a renderizar la tabla
   private rerenderTable(): void {
-    this.dtElement.dtInstance.then((dtInstance: any) => {
-      dtInstance.destroy();
-      setTimeout(() => {
+    console.log('Intentando rerenderizar tabla...');
+    const newData = this.getBoletos().map(boleto => ({
+      dni: boleto.dni,
+      email: boleto.email,
+      precio: boleto.precio,
+      precioFinal: this.calcularPrecioFinalParaBoleto(boleto),
+      categoria: this.categorias[boleto.categoriaTurista].label,
+      fechaCompra: boleto.fechaCompra
+    }));
+    console.log('Datos para DataTables:', newData);
+    if (this.dtElement && this.dtElement.dtInstance) {
+      this.dtElement.dtInstance.then((dtInstance: any) => {
+        console.log('Actualizando datos de la tabla...');
+        dtInstance.destroy(); // Destruir la tabla existente
+        this.dtOptions.data = newData;
+        this.dtTrigger.next(null); // Reinicializar
+        this.cdr.detectChanges();
+        console.log('Tabla rerenderizada');
+      }).catch((error: any) => {
+        console.error('Error al destruir tabla:', error);
+        this.dtOptions.data = newData;
         this.dtTrigger.next(null);
-        this.cdr.detectChanges(); // Forzar detección de cambios
-      }, 0);
-    }).catch(() => {
-      // Si la tabla no está inicializada, renderizar directamente
+        this.cdr.detectChanges();
+        console.log('Tabla renderizada tras error');
+      });
+    } else {
+      console.log('Tabla no inicializada, renderizando desde cero');
+      this.dtOptions.data = newData;
       this.dtTrigger.next(null);
-    });
+      this.cdr.detectChanges();
+      console.log('Tabla renderizada desde cero');
+    }
   }
 }
