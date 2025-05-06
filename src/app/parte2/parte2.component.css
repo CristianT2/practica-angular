@@ -1,66 +1,95 @@
 /* Fondo oscuro para todo el componente */
 .bg-dark {
-    background-color: #212529 !important;
-  }
-  
-  /* Estilo para el botón personalizado */
-  .btn-custom {
-    background-color: #00cc99;
-    color: #ffffff;
-    border-color: #00cc99;
-  }
-  
-  .btn-custom:hover {
-    background-color: #00b386;
-    border-color: #00b386;
-  }
-  
-  .btn-custom:focus {
-    box-shadow: 0 0 0 0.25rem rgba(0, 204, 153, 0.5);
-  }
-  
-  /* Estilo para el botón de reset */
+  background-color: #212529 !important;
+}
+
+/* Estilo para el botón personalizado */
+.btn-custom {
+  background-color: #00cc99;
+  color: #ffffff;
+  border-color: #00cc99;
+}
+
+.btn-custom:hover {
+  background-color: #00b386;
+  border-color: #00b386;
+}
+
+.btn-custom:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 204, 153, 0.5);
+}
+
+/* Estilo para el botón de reset */
+.btn-outline-secondary {
+  color: #ffffff;
+  border-color: #6c757d;
+  background-color: #e9a854;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+/* Estilos para los botones de acción en la tabla */
+.btn-edit,
+.btn-delete {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+/* Mejora visual para las tarjetas */
+.card.bg-dark {
+  border: 1px solid #495057;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajuste de espaciado para las tablas */
+.table {
+  margin-bottom: 0;
+}
+
+/* Estilo para las celdas de la tabla */
+.table-dark th,
+.table-dark td {
+  border-color: #495057;
+}
+
+/* Ajuste para el texto en el resumen */
+.text-end {
+  font-weight: bold;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 576px) {
+
+  .btn-custom,
   .btn-outline-secondary {
-    color: #ffffff;
-    border-color: #6c757d;
-    background-color: #e9a854;
+    width: 100%;
   }
-  
-  .btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: #ffffff;
+
+  .d-flex.gap-2 {
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  
-  /* Mejora visual para las tarjetas */
-  .card.bg-dark {
-    border: 1px solid #495057;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Ajuste de espaciado para las tablas */
-  .table {
-    margin-bottom: 0;
-  }
-  
-  /* Estilo para las celdas de la tabla */
-  .table-dark th,
-  .table-dark td {
-    border-color: #495057;
-  }
-  
-  /* Ajuste para el texto en el resumen */
-  .text-end {
-    font-weight: bold;
-  }
-  
-  /* Responsividad para pantallas pequeñas */
-  @media (max-width: 576px) {
-    .btn-custom,
-    .btn-outline-secondary {
-      width: 100%;
-    }
-    .d-flex.gap-2 {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  }
+}

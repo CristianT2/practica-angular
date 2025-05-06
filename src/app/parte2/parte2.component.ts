@@ -36,6 +36,8 @@ export class Parte2Component implements OnInit, AfterViewInit{
     { value: 2, label: 'Adulto' },
     { value: 3, label: 'Jubilado' }
   ];
+  isEditing: boolean = false;
+  editingDni: string | null = null
 
   constructor(private boletoService: BoletoService, private cdr: ChangeDetectorRef) {}
 
@@ -62,8 +64,34 @@ export class Parte2Component implements OnInit, AfterViewInit{
         { data: 'precio', render: (data: number) => `$${data.toFixed(2)}` },
         { data: 'precioFinal', render: (data: number) => `$${data.toFixed(2)}` },
         { data: 'categoria' },
-        { data: 'fechaCompra', render: (data: string) => new Date(data).toLocaleDateString('es-AR') }
-      ]
+        { data: 'fechaCompra', render: (data: string) => new Date(data).toLocaleDateString('es-AR') },
+        {
+          data: null,
+          orderable: false,
+          render: (data: any, type: any, row: any) => {
+            return `
+              <button class="btn btn-sm btn-warning btn-edit me-1" data-dni="${row.dni}">Editar</button>
+              <button class="btn btn-sm btn-danger btn-delete" data-dni="${row.dni}">Eliminar</button>
+            `;
+          }
+        }
+      ],
+      drawCallback: () => {
+        // Añadir eventos a los botones después de cada renderizado
+        const component = this;
+        document.querySelectorAll('.btn-edit').forEach(button => {
+          button.addEventListener('click', () => {
+            const dni = button.getAttribute('data-dni');
+            if (dni) component.editarBoleto(dni);
+          });
+        });
+        document.querySelectorAll('.btn-delete').forEach(button => {
+          button.addEventListener('click', () => {
+            const dni = button.getAttribute('data-dni');
+            if (dni) component.eliminarBoleto(dni);
+          });
+        });
+      }
     };
 
     // Calcula el precio final inicial
@@ -101,12 +129,44 @@ export class Parte2Component implements OnInit, AfterViewInit{
   // Registra un nuevo boleto en el servicio y actualiza la tabla
   registrarBoleto(): void {
     if (this.boleto.dni && this.boleto.email && this.boleto.precio > 0 && this.boleto.categoriaTurista > 0) {
-      this.boletoService.createBoleto({ ...this.boleto, fechaCompra: new Date() });
+      if (this.isEditing && this.editingDni) {
+        // Modo edición: actualizar boleto
+        const updatedBoleto = { ...this.boleto, fechaCompra: new Date() };
+        this.boletoService.updateBoleto(this.editingDni, updatedBoleto);
+        console.log('Boleto actualizado:', updatedBoleto);
+      } else {
+        // Modo creación: registrar nuevo boleto
+        const nuevoBoleto = { ...this.boleto, fechaCompra: new Date() };
+        this.boletoService.createBoleto(nuevoBoleto);
+        console.log('Boleto registrado:', nuevoBoleto);
+      }
+      console.log('Array de boletos:', this.boletoService.getBoletos());
       this.resetFormulario();
       this.rerenderTable();
-      console.log(this.boletoService.getBoletos());
     } else {
       alert('Por favor, completa todos los campos.');
+    }
+  }
+
+  //Permite editar un boleto registrado
+  editarBoleto(dni: string): void {
+    const boleto = this.boletoService.getBoletos().find(b => b.dni === dni);
+    if (boleto) {
+      this.boleto = { ...boleto };
+      this.isEditing = true;
+      this.editingDni = dni;
+      this.calcularPrecioFinal();
+      this.cdr.detectChanges();
+    }
+  }
+
+  //Limina un boleto registrado
+  eliminarBoleto(dni: string): void {
+    if (confirm('¿Estás seguro de eliminar este boleto?')) {
+      this.boletoService.deleteBoleto(dni);
+      console.log('Boleto eliminado, DNI:', dni);
+      console.log('Array de boletos:', this.boletoService.getBoletos());
+      this.rerenderTable();
     }
   }
 
@@ -120,6 +180,8 @@ export class Parte2Component implements OnInit, AfterViewInit{
       email: ''
     };
     this.precioFinal = 0;
+    this.isEditing = false;
+    this.editingDni = null;
     this.cdr.detectChanges(); // Forzar detección de cambios
   }
 

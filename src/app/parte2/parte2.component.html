@@ -6,7 +6,7 @@
         <!-- Formulario -->
         <div class="card mb-4">
             <div class="card-header">
-                <h2 class="h4 mb-0">Registrar Boleto</h2>
+                <h2 class="h4 mb-0">{{ isEditing ? 'Editar Boleto' : 'Registrar Boleto' }}</h2>
             </div>
             <div class="card-body">
                 <form>
@@ -15,7 +15,7 @@
                         <div class="col-md-6">
                             <label for="dni" class="form-label">DNI</label>
                             <input type="text" class="form-control border-secondary" id="dni"
-                                [(ngModel)]="boleto.dni" name="dni" placeholder="Ej. 12345678" required />
+                                [(ngModel)]="boleto.dni" name="dni" placeholder="Ej. 12345678" [disabled]="isEditing" required />
                         </div>
                         <!-- Email -->
                         <div class="col-md-6">
@@ -49,7 +49,7 @@
                     </div>
                     <!-- Botones -->
                     <div class="d-flex gap-2 mt-3">
-                        <button type="button" class="btn btn-custom" (click)="registrarBoleto()">Registrar</button>
+                        <button type="button" class="btn btn-custom" (click)="registrarBoleto()">{{ isEditing ? 'Actualizar' : 'Registrar' }}</button>
                         <button type="button" class="btn btn-outline-secondary"
                             (click)="resetFormulario()">Reset</button>
                     </div>
@@ -73,6 +73,7 @@
                             <th>Precio Final</th>
                             <th>Categoría</th>
                             <th>Fecha Compra</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
